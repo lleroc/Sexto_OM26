@@ -8,7 +8,9 @@ class Persona{
         $ejecutar->bind_param('s',$nombre);
         return $ejecutar->execute();
     }
-    public function listar():mysql_result|bool{
-        return $this->conexion->query('select id, nombre from personas');
+   public function listar(): mysqli_result|bool {
+        return $this->conexion->query(
+            "SELECT * FROM personas"
+        );
     }
 }
