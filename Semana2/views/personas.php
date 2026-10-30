@@ -14,9 +14,9 @@
 
     <h3>Lista de Personas registradas</h3>
     <ul>
-        <?php while($fila = $persona->fetch_assoc()): ?>
+        <?php while($fila = $personas->fetch_assoc()): ?>
 
-            <li><? htmlspecialchars($fila['nombre'],ENT_QUOTES, 'UTF-8') ?> ></li>
+            <li><?= ($fila['nombre']) ?></li>
 
         <?php endwhile; ?>
     </ul>
