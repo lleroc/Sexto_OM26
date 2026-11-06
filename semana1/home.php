@@ -70,12 +70,12 @@
             <h5 class="mb-0">Datos de la Factura</h5>
         </div>
         <div class="card-body">
-            <p><strong>Numero:</strong> <?= $numero_factura ?> </p>
-            <p><strong>Nombres:</strong> <?= $nombre ?> </p>
-            <p><strong>Cédula:</strong> <?= $cedula ?> </p>
-            <p><strong>Dirección:</strong> <?= $direccion ?> </p>
-            <p><strong>Teléfono:</strong> <?= $telefono ?> </p>
-            <p><strong>Correo Electrónico:</strong> <?= $mail ?> </p>
+            <p><strong>Numero:</strong> <?= htmlspecialchars($numero_factura, ENT_QUOTES, 'UTF-8') ?> </p>
+            <p><strong>Nombres:</strong> <?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?> </p>
+            <p><strong>Cédula:</strong> <?= htmlspecialchars($cedula, ENT_QUOTES, 'UTF-8') ?> </p>
+            <p><strong>Dirección:</strong> <?= htmlspecialchars($direccion, ENT_QUOTES, 'UTF-8') ?> </p>
+            <p><strong>Teléfono:</strong> <?= htmlspecialchars($telefono, ENT_QUOTES, 'UTF-8') ?> </p>
+            <p><strong>Correo Electrónico:</strong> <?= htmlspecialchars($mail, ENT_QUOTES, 'UTF-8') ?> </p>
         </div>
     </div>
 

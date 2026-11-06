@@ -8,23 +8,24 @@ const mensaje = document.getElementById("mensaje")
 async function todos() {
     try{
         const respuesta = await fetch(API + "?accion=todos");
-        if(!respuesta.ok){
-            throw new Error("Error al obtener los datos")
-        }
         const carreras = await respuesta.json();
+        if(!respuesta.ok){
+            throw new Error(carreras.error || "Error al obtener los datos");
+        }
         tablahtml.innerHTML ="";
-        carreras.array.forEach(carrera => {
+        carreras.forEach(carrera => {
             const fila = document.createElement("tr");
             const celdaId = document.createElement("td");
             const nombrecelda = document.createElement("td");
 
+            celdaId.textContent = carrera.id;
             nombrecelda.textContent = carrera.nombre;
             fila.appendChild(celdaId);
             fila.appendChild(nombrecelda);
             tablahtml.appendChild(fila)
         });
     }catch(error){
-        mensaje.textContent = error.mensaje
+        mensaje.textContent = error.message
     }
 }
 
@@ -44,18 +45,17 @@ formulario.addEventListener("submit", async function(event) {
             }
         );
 
-        if (!respuesta.ok) {
-            throw new Error("Error al guardar");
-        }
-
         const resultado = await respuesta.json();
+        if (!respuesta.ok) {
+            throw new Error(resultado.error || "Error al guardar");
+        }
 
         if (resultado.guardado) {
             mensaje.textContent = "Carrera guardada correctamente";
 
             formulario.reset();
 
-            listarCarreras();
+            await todos();
         } else {
             mensaje.textContent = "No se pudo guardar";
         }
@@ -65,5 +65,22 @@ formulario.addEventListener("submit", async function(event) {
     }
 });
 
-// Cargar carreras al iniciar
+async function crearTabla() {
+    try {
+        const respuesta = await fetch(API + "?accion=creartabla", {
+            method: "POST"
+        });
+        const resultado = await respuesta.json();
+        if (!respuesta.ok || !resultado.tabla_creada) {
+            throw new Error(resultado.error || "No se pudo crear la tabla");
+        }
+        mensaje.textContent = "Tabla creada correctamente. Si ya existía, se conservaron los datos.";
+        await todos();
+    } catch (error) {
+        mensaje.textContent = error.message;
+    }
+}
+
+document.getElementById("crearTabla").addEventListener("click", crearTabla);
+
 todos();

@@ -9,14 +9,14 @@
     <h2>Guardar Persona</h2>
     <form method='POST'>
         <input type="text" name = 'nombre' placeholder='Ingrese su Nombre' required>
-        <button type='sumbit' >Guardar</button>
+        <button type='submit' >Guardar</button>
     </form>
 
     <h3>Lista de Personas registradas</h3>
     <ul>
         <?php while($fila = $personas->fetch_assoc()): ?>
 
-            <li><?= ($fila['nombre']) ?></li>
+            <li><?= htmlspecialchars($fila['nombre'], ENT_QUOTES, 'UTF-8') ?></li>
 
         <?php endwhile; ?>
     </ul>

@@ -11,11 +11,12 @@ class PersonaController{
 
     public function index():void{
         $personas = $this->modelos->listar();
-        require __DIR__ . '../../views/personas.php';
+        require __DIR__ . '/../views/personas.php';
     }
 
     public function guardar():void{
-        $nombre = trim($_POST['nombre'] ?? '');
+        $nombre = $_POST['nombre'] ?? '';
+        $nombre = is_string($nombre) ? trim($nombre) : '';
         if($nombre !== ''){
             $this->modelos->guardar($nombre);
         }

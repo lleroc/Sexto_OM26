@@ -7,15 +7,15 @@ class Carrera{
     }
 
     public function crearTabla(){
-        $cadena = "create table if not exist carreras(
-        id INT AUTO_INCREMENT PRIMRY KEY, 
+        $cadena = "create table if not exists carreras(
+        id INT AUTO_INCREMENT PRIMARY KEY, 
         nombre VARCHAR(200) NOT NULL)";
 
         return $this->conexion->query($cadena);
     }
     public function todos(){
         $cadena = "Select * from carreras";
-        $resultado = $this->conexion->query($sql);
+        $resultado = $this->conexion->query($cadena);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
     public function guardar($nombre){
